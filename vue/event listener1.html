@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>learniing vue</title>
+    </head>
+    <body>
+        
+        <div id="app" class="container">
+            <!--code-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>تعداد کلیک های شما {{ counter }} است</h1>
+                    <button type="button" id="plus" v-on:click="counter++">click</button>
+                </div>
+            </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+            <script type="text/javascript">
+                    var app = new Vue({
+                        el : '#app',
+                        data : {
+                            counter : 0
+                        }
+                    });
+
+            </script>
+    </body>
+</html>
