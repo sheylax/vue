@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            learning vue
+        </title>
+        <body>
+            <div id="app">
+                <ul>
+                    <li v-for="value in users">{{ value }}</li>
+                </ul>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+            <script type="text/javascript">
+            
+            var app = new Vue({
+                el : '#app',
+                data : { 
+                    users : ["hesam" , "majed" , "amigo" , "mamad"]
+                }
+            });
+            
+            </script>
+        </body>
+    </head>
+</html>
