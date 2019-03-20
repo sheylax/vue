@@ -7,21 +7,39 @@
     <body>
         <div id="app" class="container"> 
 
-            <h1>مقدار کلیک های شما {{ counter }} است</h1>
-            <button type="button" id="plus" v-on:click="counter++">click</button>
-            <button type="button" id="min" v-on:click="counter-=1">min</button>
+            <h1>daily works</h1>
+            <ul>
+                <li v-for="(todo, index) in todos"><a href="#" v-on:click.prevent="removeTodo(index)">{{ todo }}</a></li>
+            </ul>
+            <input type="text" class="form-control" v-model="newTodo" placeholder="new work" v-on:keyup.enter="addtodo">
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
         <script type="text/javascript">
 
-            var app = new Vue({
+            let app = new Vue({
 
                 el : '#app',
                 data : {
+                    newTodo : '',
 
-                    counter : 0
+                    todos:[
+                        'do work 1',
+                        'post some pic on instagram',
+                        'play some WOW'
+                    ]
 
+                },
+                methods : {
+                    addtodo(){
+                        if(this.newTodo != ''){
+                            this.todos.push(this.newTodo);
+                            this.newTodo = '';
+                        }
+                    },
+                    removeTodo(index){
+                        this.todos.splice(index,1);
+                    }
                 }
 
             });
