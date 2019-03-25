@@ -3,18 +3,21 @@
     <head>
         <meta charset="utf-8">
         <title>learning</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="app" class="container"> 
-
-            <h1>daily works</h1>
+            <h1>{{ name }}</h1>
+            <h2>daily works</h2>
             <ul>
-                <li v-for="(todo, index) in todos"><a href="#" v-on:click.prevent="removeTodo(index)">{{ todo }}</a></li>
+                <li v-for="(todo, index) in todos"><a href="#" :class="{ complete : todo.complete }" v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>
             </ul>
             <input type="text" class="form-control" v-model="newTodo" placeholder="new work" v-on:keyup.enter="addtodo">
-            <div  class="row">
-                <img :src="imageUrl" :alt="altImage" :style="style">
-            </div>
+            <hr>
+            <h2>DONE</h2>
+            <ul>
+                <li v-for="(todo, index) in completeTodos"><a href="#" v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>
+            </ul>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
         <script type="text/javascript">
@@ -25,16 +28,14 @@
                 data : {
                     newTodo : '',
 
-                    todos:[
-                        'do work 1',
-                        'post some pic on instagram',
-                        'play some WOW'],
-                        imageUrl : 'https://roocket.ir/public/image/2018/4/10/nodejs-1.png',
-                        altImage : 'nodejs',
-                        style : {
-                            width : 800 + 'px',
-                            marginTop : 80 + 'px'
-                        },
+                    todos : [
+                        {title : 'do work 1' , complete : true},
+                        {title : 'post some pic on instagram' , complete : false},
+                        {title : 'play some WOW' , complete : true}
+                        ],
+
+                        firstname : "mohammad",
+                        lastname : "shahriyari"
                     
 
                 },
@@ -46,8 +47,17 @@
                         }
                     },
                     removeTodo(index){
-                        this.todos.splice(index,1);
+                        this.todos[index].complete = ! this.todos[index].complete;
                     }
+                },
+                computed : {
+                    completeTodos(){
+                        return this.todos.filter(todo => todo.complete);
+                    },
+                    name(){
+                        return this.firstname + ' ' + this.lastname;
+                    }
+
                 }
 
             });
