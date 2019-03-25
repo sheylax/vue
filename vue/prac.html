@@ -7,12 +7,11 @@
     </head>
     <body>
         <div id="app" class="container"> 
-            <h1>{{ name }}</h1>
             <h2>daily works</h2>
             <ul>
                 <li v-for="(todo, index) in todos"><a href="#" :class="{ complete : todo.complete }" v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>
             </ul>
-            <input type="text" class="form-control" v-model="newTodo" placeholder="new work" v-on:keyup.enter="addtodo">
+            <input type="text" class="form-control" v-model="newTodo.title" placeholder="new work" v-on:keyup.enter="addtodo">
             <hr>
             <h2>DONE</h2>
             <ul>
@@ -26,8 +25,10 @@
 
                 el : '#app',
                 data : {
-                    newTodo : '',
-
+                    newTodo : {
+                        title : '',
+                        complete : false
+                    },
                     todos : [
                         {title : 'do work 1' , complete : true},
                         {title : 'post some pic on instagram' , complete : false},
@@ -43,7 +44,7 @@
                     addtodo(){
                         if(this.newTodo != ''){
                             this.todos.push(this.newTodo);
-                            this.newTodo = '';
+                            this.newTodo = { title : '' , complete : false};
                         }
                     },
                     removeTodo(index){
@@ -53,9 +54,6 @@
                 computed : {
                     completeTodos(){
                         return this.todos.filter(todo => todo.complete);
-                    },
-                    name(){
-                        return this.firstname + ' ' + this.lastname;
                     }
 
                 }
