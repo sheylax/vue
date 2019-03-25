@@ -12,7 +12,9 @@
                 <li v-for="(todo, index) in todos"><a href="#" v-on:click.prevent="removeTodo(index)">{{ todo }}</a></li>
             </ul>
             <input type="text" class="form-control" v-model="newTodo" placeholder="new work" v-on:keyup.enter="addtodo">
-
+            <div  class="row">
+                <img :src="imageUrl" :alt="altImage" :style="style">
+            </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
         <script type="text/javascript">
@@ -26,8 +28,14 @@
                     todos:[
                         'do work 1',
                         'post some pic on instagram',
-                        'play some WOW'
-                    ]
+                        'play some WOW'],
+                        imageUrl : 'https://roocket.ir/public/image/2018/4/10/nodejs-1.png',
+                        altImage : 'nodejs',
+                        style : {
+                            width : 800 + 'px',
+                            marginTop : 80 + 'px'
+                        },
+                    
 
                 },
                 methods : {
