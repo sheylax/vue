@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>components</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="app" class="container">
+            <my-component></my-component>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
+        <script type="text/javascript">
+        
+        Vue.component('my-component' , {
+            template : '<div>hello vue</div>'
+        });    
+
+        let app = new Vue({
+            el : '#app',
+        });
+        </script>
+    </body>
+</html>
