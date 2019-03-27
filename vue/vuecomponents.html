@@ -6,18 +6,31 @@
     </head>
     <body>
         <div id="app" class="container">
-            <my-component></my-component>
+            <my-button></my-button>
+            <my-button></my-button>
+            <my-button></my-button>
+            <my-button></my-button>
+            <my-button></my-button>
+            
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
         <script type="text/javascript">
         
-        Vue.component('my-component' , {
-            template : '<div>hello vue</div>'
+        Vue.component('myButton' , {
+            template : '<button v-on:click="counter++">{{ counter }}</button>',
+            data() {
+                return{
+                    counter : 0
+                }
+            }
         });    
 
         let app = new Vue({
             el : '#app',
+            data : {
+            counter : 0
+        }
         });
         </script>
     </body>
