@@ -11,17 +11,27 @@
     </head>
     <body>
         <div id="app" class="container">
-            <div class="alert alert-warning alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <strong>Holy guacamole!</strong> Best check yo self, you're not looking too good.
-              </div>
-            
+            <div style="margin-top:50px"></div>
+            <alert title="warning!" message="operation unsuccessful" type="warning"></alert>
+            <alert title="CONGRATZ!" message="operation successful" type="success"></alert>
         </div>
         
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.9/dist/vue.js"></script>
         <script type="text/javascript">
+        Vue.component('alert' , {
+            props : ['title' , 'message' , 'type'],
+            template : `<div :class="['alert' , classAlert]" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong>{{ title }}</strong>{{ message }}
+              </div>`,
+              data() {
+                  return {
+                      classAlert : `alert-${this.type}`
+                  }
+              }
+        });
 
         let app = new Vue({
             el : '#app',
