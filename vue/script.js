@@ -1,27 +1,29 @@
+window.Event = new Vue();
 Vue.component('alert' , {
     props : ['title' , 'message' , 'type'],
-    template : `<div :class="['alert' , classAlert]" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    template : `<div :class="['alert' , type]" role="alert">
+        <button type="button" class="close" @click="$emit('close')">
             <span aria-hidden="true">×</span>
         </button>
         <strong>{{ title }}</strong>{{ message }}
       </div>`,
-      data() {
-          return {
-              isActive : true
-          }
-      }
+
 });
 
     Vue.component('todos' , {
         props: ['todos'],
-        template : `   <ul>
+        template : `   <ul class="list-group">
        <todo v-for="(todo , index) in todos" :todo="todo" :index="index"></todo>
     </ul>`
     });
     Vue.component('todo' , {
         props : ['todo' , 'index'],
-        template : `<li><a href="#" :class="{ complete : todo.complete }" v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>`
+        template : `<li class="list-group-item"><a href="#" :class="{ complete : todo.complete }" v-on:click.prevent="removeTodo(index)">{{ todo.title }}</a></li>`,
+        methods :{
+            removeTodo(index) {
+                Event.$emit('remove' , index);
+            }
+        }
     });
 
 let app = new Vue({
@@ -46,7 +48,7 @@ let app = new Vue({
         },
         methods : {
             addtodo(){
-                if(this.newTodo != ''){
+                if(this.newTodo.title != '') {
                     this.todos.push(this.newTodo);
                     this.newTodo = { title : '' , complete : false};
                     this.alert = {
@@ -56,7 +58,12 @@ let app = new Vue({
                         type : 'alert-success'
                     }
                 } else {
-                    
+                    this.alert = {
+                        title : 'ERROR!',
+                        message : 'please make sure that you write something' ,
+                        show : true ,
+                        type : 'alert-danger'
+                    }
                 }
             },
             removeTodo(index){
@@ -66,7 +73,15 @@ let app = new Vue({
         computed : {
             completeTodos(){
                 return this.todos.filter(todo => todo.complete);
+            },
+            showCompleteBox(){
+                return this.todos.filter(todo => todo.complete).length > 0; 
             }
 
+        },
+        created(){
+            Event.$on('remove' , (index) => {
+                this.removeTodo(index);
+            });
         }
 });
