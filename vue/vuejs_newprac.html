@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>edit me</title>
+</head>
+<body>
+    <div id="main" v-cloak v-on:click="hideTooltip">
+        <div class="tooltip" v-on:click.stop v-if="show_tooltip">
+            <input type="text" v-model="text_content" />
+        </div>
+        <p v-on:click.stop="toggleTooltip">{{text_content}}</p>
+    
+    </div>
